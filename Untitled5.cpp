@@ -8,32 +8,32 @@
 
 using namespace std;
 
-// Yazarlara ait düğümün bilgileri struct olarak tanımlandı
+// Yazarlara ait dÃ¼Ã°Ã¼mÃ¼n bilgileri struct olarak tanÃ½mlandÃ½
 struct node
 {	
     int ID; // yazara ait ID bilgisi
     int kitap_sayisi;
     string yazar;
-    struct node *next; // yazarlar arası geçiş için next,prev pointerları kullanılır 
+    struct node *next; // yazarlar arasÃ½ geÃ§iÃ¾ iÃ§in next,prev pointerlarÃ½ kullanÃ½lÃ½r 
     struct node *prev;
 }*start;
 
-// Kitaplara ait düğümün bilgileri struct larak tanımlandı
+// Kitaplara ait dÃ¼Ã°Ã¼mÃ¼n bilgileri struct larak tanÃ½mlandÃ½
 struct kitap
 {
 	int ID; //kitaplara ait ID bilgisi
-    int parentID; // Kitabın yazarına ait ID bilgisi
+    int parentID; // KitabÃ½n yazarÃ½na ait ID bilgisi
     string kitap_adi;
     string kitap_turu;
     int sayfa;
     int stok;
 	string paragraf;
 	  
-    struct kitap *next; // kitaplar arası geçiş için next,prev pointerı kullanılır
+    struct kitap *next; // kitaplar arasÃ½ geÃ§iÃ¾ iÃ§in next,prev pointerÃ½ kullanÃ½lÃ½r
     struct kitap *prev;
 }*start_k;
 
-//  Kitap listesi için class tanımlandı, gerekli fonksiyonlar kullanıldı
+//  Kitap listesi iÃ§in class tanÃ½mlandÃ½, gerekli fonksiyonlar kullanÃ½ldÃ½
  class kitap_list
 {
     public:
@@ -42,14 +42,14 @@ struct kitap
         void search_kitap_element(int ID,string yazar);
         void display_kitap_dlist();
         void count_kitap();
-        // yapıcı fonksiyonu
+        // yapÃ½cÄ± fonksiyonu
 		kitap_list()
         {
             start_k = NULL;  
         }
 };
 
-//  Yazar listesi için class tanımlandı, gerekli fonksiyonlar kullanıldı
+//  Yazar listesi iÃ§in class tanÃ½mlandÃ½, gerekli fonksiyonlar kullanÃ½ldÃ½
 class double_llist
 {
     public:
@@ -58,26 +58,26 @@ class double_llist
         void search_element(int ID,string yazar);
         void display_dlist();
         void count();
-        // yapıcı fonksiyonu
+        // yapÃ½cÃ½ fonksiyonu
 		double_llist()
         {
             start = NULL;  
         }
 };
 
-// Yazar sayısı toplamı, yazarları yazdırırken kullanılması için tanımlandı
+// Yazar sayÃ½sÃ½ toplamÃ½, yazarlarÃ½ yazdÃ½rÃ½rken kullanÃ½lmasÃ½ iÃ§in tanÃ½mlandÃ½
 int getTotalAuthor(){
-	ifstream fe("yazar.dat"); // fe tanımı yazar.dat dosyasına okuma yapmaktdır
+	ifstream fe("yazar.dat"); // fe tanÃ½mÃ½ yazar.dat dosyasÃ½na okuma yapmaktdÃ½r
 	int i = 0;
 	string line;
-	while (getline(fe,line)){ // Burada Kaç satır var bunu buluyoruz
+	while (getline(fe,line)){ // Burada KaÃ§ satÃ½r var bunu buluyoruz
 		++i;
 	}
 	return i;
 }
 
-// integer ı stringe ceviriyoruz
-// writeTo fonksiyonları için kullanıldı
+// integer Ã½ stringe ceviriyoruz
+// writeTo fonksiyonlarÃ½ iÃ§in kullanÃ½ldÃ½
 string myitos (int a)
 {
     ostringstream temp;
@@ -85,7 +85,7 @@ string myitos (int a)
     return temp.str();
 }
 
-// myfile degiskeni tanımlanarak yazar.dat dosyasından okuma yapılıyor.  
+// myfile degiskeni tanÃ½mlanarak yazar.dat dosyasÃ½ndan okuma yapÃ½lÃ½yor.  
 void readTo(double_llist name)
     {
     	string yazar;
@@ -101,7 +101,7 @@ void readTo(double_llist name)
 		}
 		else{	
 			for(int i=0; i<getTotalAuthor();i++){
-    		getline(myfile,I,'='); // dosyada kullanıldıgı icin implementer olarak geciyor
+    		getline(myfile,I,'='); // dosyada kullanÃ½ldÃ½gÃ½ icin implementer olarak geciyor
 			ID = atoi(I.c_str());  // stringi integer a ceviriyor..
     		getline(myfile,y,'=');
     		getline(myfile,k,'=');
@@ -113,7 +113,7 @@ void readTo(double_llist name)
 		
     }
     
-// Yeni yazar oluşturunca dosyaya aktarma işini yapıyor    
+// Yeni yazar oluÃ¾turunca dosyaya aktarma iÃ¾ini yapÃ½yor    
 void writeTo(int ID,string yazar,int kitap_sayisi){
 	fstream fs;
 	string a="\n";
@@ -123,15 +123,15 @@ void writeTo(int ID,string yazar,int kitap_sayisi){
 	a += "=";
 	a += myitos(kitap_sayisi);
 	a += "=";
-  //fstream::app dosyaya ekleme için kullanıldı	
+  //fstream::app dosyaya ekleme iÃ§in kullanÃ½ldÃ½	
   fs.open ("yazar.dat", std::fstream::in | std::fstream::out | std::fstream::app);
   fs << a;
   fs.close();
 }
 
-// Kitap sayısı bulunuyor
+// Kitap sayÃ½sÃ½ bulunuyor
 int getTotalKitap(){
-	ifstream fe("kitap.dat"); // kitap.dat dosyasından sayı hesaplandı.
+	ifstream fe("kitap.dat"); // kitap.dat dosyasÃ½ndan sayÃ½ hesaplandÃ½.
 	int i = 0;
 	string line;
 	while (getline(fe,line)){
@@ -140,7 +140,7 @@ int getTotalKitap(){
 	return i;
 }
 
-// Kitap bilgileri Programa aktarılıyor
+// Kitap bilgileri Programa aktarÃ½lÃ½yor
 void readToKitap(kitap_list name)
     {
     	string kitap_adi;
@@ -149,7 +149,7 @@ void readToKitap(kitap_list name)
     	string I,p,s,st;
     	
     	ifstream myfile ("kitap.dat");
-    	if (!myfile) // dosya yoksa uyarı verir
+    	if (!myfile) // dosya yoksa uyarÃ½ verir
     	{
     		cout<<"kitap.dat not found on program directory";
     		exit(1);
@@ -179,7 +179,7 @@ void readToKitap(kitap_list name)
     	
 		
     }
-// Kitapları kitap.dat dosyasına yazıyor    
+// KitaplarÃ½ kitap.dat dosyasÃ½na yazÃ½yor    
 void writeToKitap(int ID,int parentID,string kitap_adi,string kitap_turu,int sayfa,int stok){
 	fstream fs;
 	string a="\n";
@@ -205,8 +205,8 @@ void writeToKitap(int ID,int parentID,string kitap_adi,string kitap_turu,int say
 
 
 
-// Ana menüyü access degiskeni ile cagırıyor
-// access admin mi kullanıcı mı bunu belirtiyor.
+// Ana menÃ¼yÃ¼ access degiskeni ile cagÃ½rÃ½yor
+// access admin mi kullanÃ½cÃ½ mÃ½ bunu belirtiyor.
 //1-> user 2->admin 
 int callMainMenu(int access){
 	
@@ -215,10 +215,10 @@ int callMainMenu(int access){
     double_llist dl; // yazar listesi
     kitap_list kl;   //kitap listesi
     bool list=false; 
-	readTo(dl); //program acılınca otomatik olarak yazarları içe aktarır
+	readTo(dl); //program acÃ½lÃ½nca otomatik olarak yazarlarÃ½ iÃ§e aktarÃ½r
 	readToKitap(kl);
 	string user;
-	//Burada yetki kısmı belirleniyor
+	//Burada yetki kÃ½smÃ½ belirleniyor
 	if(access==2){
 		user="Administration";
 	}
@@ -228,13 +228,13 @@ int callMainMenu(int access){
   
     while (1)
     {x:
-	system("color 4f"); // arayüz için renk eklendi
+	system("color 4f"); // arayÃ¼z iÃ§in renk eklendi
     	
-      if (list==false){ // listenin görüntülenmesi kontrol edildi
+      if (list==false){ // listenin gÃ¶rÃ¼ntÃ¼lenmesi kontrol edildi
         cout<<endl<<"----------------------------"<<endl;
         cout<<endl<<"Library "<<user<<" Panel"<<endl;
         cout<<endl<<"----------------------------"<<endl;    
-		// admin ise tüm secenekler gösteriliyor  
+		// admin ise tÃ¼m secenekler gÃ¶steriliyor  
         if(access==2){
         	
 		cout<<"1.Edit Books of Author"<<endl;
@@ -249,7 +249,7 @@ int callMainMenu(int access){
         {
         case 1:
         	system("cls");
-        // menü yazdırıldı 1 ile her ihtimalde while e girdik	
+        // menÃ¼ yazdÃ½rÃ½ldÃ½ 1 ile her ihtimalde while e girdik	
          while (1){
 		 	//aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     		int choice;
@@ -260,7 +260,7 @@ int callMainMenu(int access){
         	cout<<endl<<"----------------------------"<<endl;
         	cout<<endl<<"Library Administration Panel"<<endl;
         	cout<<endl<<"----------------------------"<<endl;    
-			//Kitap düzenleme menüsü     
+			//Kitap dÃ¼zenleme menÃ¼sÃ¼     
         	cout<<"0.Add Book"<<endl;
 			cout<<"1.Delete Book"<<endl; 
         	cout<<"2.Search Book by Name"<<endl;
@@ -357,7 +357,7 @@ int callMainMenu(int access){
 			  cin>>ksayfa;
 			  cout<<"Enter This Book's Amount ";
 			  cin>>kstok;
-			  //yeni kitap olusunca dosyaya atıyor
+			  //yeni kitap olusunca dosyaya atÃ½yor
 			  writeToKitap(kID,ID,k_adi,k_turu,ksayfa,kstok);
 			  kl.create_kitap_list(kID,ID,k_adi,k_turu,ksayfa,kstok);
 			}
@@ -373,7 +373,7 @@ int callMainMenu(int access){
             cout<<"Enter the ID for delete an author: ";
             cin>>ID;
             system("cls");
-            dl.delete_element(ID);//ID bilgisi kitap silmede kullanıldı
+            dl.delete_element(ID);//ID bilgisi kitap silmede kullanÃ½ldÃ½
             break;
         case 4:
         	system("cls");
@@ -397,7 +397,7 @@ int callMainMenu(int access){
             break;
         case 5:
         	system("cls");
-            dl.count(); // yazar listesindeki yazar sayısı
+            dl.count(); // yazar listesindeki yazar sayÃ½sÃ½
             break;    
         case 6:
             exit(1);
@@ -408,7 +408,7 @@ int callMainMenu(int access){
       
         
     }
-	//Kullanıcı Menüsü
+	//KullanÃ½cÃ½ MenÃ¼sÃ¼
 	else if(access==1){
     	cout<<"1.Display Authors"<<endl;
         cout<<"2.Count of Authors"<<endl; 
@@ -422,7 +422,7 @@ int callMainMenu(int access){
     		case 1:
         		system("cls");
         		list=true;
-            	dl.display_dlist();//yazarları gösterir
+            	dl.display_dlist();//yazarlarÃ½ gÃ¶sterir
             	int quit;
             	cin>>quit;
 				switch(quit){
@@ -442,15 +442,15 @@ int callMainMenu(int access){
             dl.count();
             break;    
         case 3:
-            kl.display_kitap_dlist(); // kitap listesini gösterir
+            kl.display_kitap_dlist(); // kitap listesini gÃ¶sterir
             break; 
-        case 4:                       // kitap sayısı
+        case 4:                       // kitap sayÃ½sÃ½
             kl.count_kitap();
             break; 
         case 5:
             exit(1);
         default:
-            cout<<"Wrong choice"<<endl; // yanlış seçimde 
+            cout<<"Wrong choice"<<endl; // yanlÃ½Ã¾ seÃ§imde 
 		}
 	}
       } 
@@ -458,7 +458,7 @@ int callMainMenu(int access){
     return 0;
 }
 
- // kitap_list classına ait fonksiyon tanımlandı	
+ // kitap_list classÃ½na ait fonksiyon tanÃ½mlandÃ½	
  void kitap_list::create_kitap_list(int ID,int parentID,string kitap_adi,string kitap_turu,int sayfa,int stok)
 {
     struct kitap *s2, *temp2;
@@ -485,9 +485,9 @@ int callMainMenu(int access){
     }
 }
 
-// yazar classına ait fonksiyon tanımı yapıldı
+// yazar classÃ½na ait fonksiyon tanÃ½mÃ½ yapÃ½ldÃ½
 void double_llist::create_list(int ID,string yazar,int kitap_sayisi)
-{   //s baslangıc node unu belirler temp geçiş yapar
+{   //s baslangÃ½c node unu belirler temp geÃ§iÃ¾ yapar
     struct node *s, *temp;
     temp = new(struct node); 
     temp->ID = ID;
@@ -508,7 +508,7 @@ void double_llist::create_list(int ID,string yazar,int kitap_sayisi)
         temp->prev = s;
     }
 }
-// yazar classına ait silme fonksiyonu tanımı
+// yazar classÃ½na ait silme fonksiyonu tanÃ½mÃ½
 void double_llist::delete_element(int ID)
 {
     struct node *tmp, *q;
@@ -549,7 +549,7 @@ void double_llist::delete_element(int ID)
     
     cout<<"Author with ID= "<<ID<<" not found"<<endl;
 }
-// kitap classına ait kitap silme fonksiyonu 
+// kitap classÃ½na ait kitap silme fonksiyonu 
 void kitap_list::delete_kitap_element(int ID)
 {
     struct kitap *tmp2, *q2;
@@ -564,7 +564,7 @@ void kitap_list::delete_kitap_element(int ID)
         return;
     }
     q2 = start_k;
-    //Girilen ID listenin ortasındaysa
+    //Girilen ID listenin ortasÃ½ndaysa
     while (q2->next->next != NULL)
     {   
         if (q2->next->ID == ID)  
@@ -587,12 +587,12 @@ void kitap_list::delete_kitap_element(int ID)
         cout<<"Book Deleted";
         return;
     }
-    //Silinmek istenen Kitap listede yoksa uyarı verir
+    //Silinmek istenen Kitap listede yoksa uyarÃ½ verir
     cout<<"Book with ID= "<<ID<<" not found"<<endl;
 }
- //kitap classına ait kitap listeleme fonksiyonu tanımlandı   
+ //kitap classÃ½na ait kitap listeleme fonksiyonu tanÃ½mlandÃ½   
 void kitap_list::display_kitap_dlist()
-{   //liste boşsa
+{   //liste boÃ¾sa
     struct kitap *q2;
     if (start_k == NULL)
     {
@@ -612,7 +612,7 @@ void kitap_list::display_kitap_dlist()
     cout<<"(1) Go Back"<<endl;
 }
 
-//Yazar classına ait yazar listesini gösteren fonksiyon tanımlandı
+//Yazar classÃ½na ait yazar listesini gÃ¶steren fonksiyon tanÃ½mlandÃ½
 void double_llist::display_dlist()
 {
     struct node *q;
@@ -634,7 +634,7 @@ void double_llist::display_dlist()
     cout<<"(1) Go Back"<<endl;
 }
 
-//Yazar classına ait yazarları sayan fonksiyon tanımlandı
+//Yazar classÃ½na ait yazarlarÃ½ sayan fonksiyon tanÃ½mlandÃ½
 void double_llist::count()
 { 	
     struct node *q = start;
@@ -646,7 +646,7 @@ void double_llist::count()
     }
     cout<<"Number of Authors are: "<<cnt<<endl;
 }
-//Kitap classına ait kitapları sayan fonksiyon tanımlandı
+//Kitap classÃ½na ait kitaplarÃ½ sayan fonksiyon tanÃ½mlandÃ½
 void kitap_list::count_kitap()
 { 	
     struct kitap *q = start_k;
@@ -658,9 +658,9 @@ void kitap_list::count_kitap()
     }
     cout<<"Number of Books are: "<<cnt<<endl;
 }
-//Giriş ekranı başlangıcı
-//Toplam user sayısı bulunuyor
-//For döngüsü için kullanıldı
+//GiriÃ¾ ekranÃ½ baÃ¾langÃ½cÃ½
+//Toplam user sayÃ½sÃ½ bulunuyor
+//For dÃ¶ngÃ¼sÃ¼ iÃ§in kullanÃ½ldÃ½
 int getTotalUser(){
 	ifstream fe("user.dat");
 	int i = 0;
@@ -670,7 +670,7 @@ int getTotalUser(){
 	}
 	return i;
 }
-//Kullanıcı adı ve şifresi Dosyada var mı kontrol ediliyor
+//KullanÃ½cÃ½ adÃ½ ve Ã¾ifresi Dosyada var mÃ½ kontrol ediliyor
 int userControl(string username , string password){
 	string userData;
   	string passData;
@@ -689,36 +689,36 @@ int userControl(string username , string password){
    		if(username==userData && password==passData){
    			if(accessData=="admin")
    				{admin=true;}
-   				++match; //eşleşince 
+   				++match; //eÃ¾leÃ¾ince 
 		   }
 	}
 		if(admin==true && match==1)
-			return 2;//admin girişi 
+			return 2;//admin giriÃ¾i 
 		else if(admin==false && match==1){
-			return 1;//user girişi
+			return 1;//user giriÃ¾i
 		}
 		else 
-			return 0;//eşleşme bulunamadı
+			return 0;//eÃ¾leÃ¾me bulunamadÃ½
 }
 
-/*Yanlış giriş limiti aşılınca belirlenen
- süre kadar giriş yapılamıyor,sonrasında giriş
- ekranı yeniden görüntüleniyor
+/*YanlÃ½Ã¾ giriÃ¾ limiti aÃ¾Ã½lÃ½nca belirlenen
+ sÃ¼re kadar giriÃ¾ yapÃ½lamÃ½yor,sonrasÃ½nda giriÃ¾
+ ekranÃ½ yeniden gÃ¶rÃ¼ntÃ¼leniyor
 */
 int timer(int sec){
-	int i=sec; //sec degeri aşağıdaki fonksiyonda belirlenerek kullanılıyor
+	int i=sec; //sec degeri aÃ¾aÃ°Ã½daki fonksiyonda belirlenerek kullanÃ½lÃ½yor
 	for(int s=0;s<=sec*160;s++){
 		system("cls");
 		cout<<"\t\t\t\tWait ";
 		cout<<i<<" seconds for login";
-		if(s%160==0) //16gb ram i7 işlemcide ortalama tahminen 1sn sürüyor
+		if(s%160==0) //16gb ram i7 iÃ¾lemcide ortalama tahminen 1sn sÃ¼rÃ¼yor
 		i--;	 
 			
 		
 	}
 }
 
-// Giriş ekranı görüntüleme
+// GiriÃ¾ ekranÃ½ gÃ¶rÃ¼ntÃ¼leme
 int colorizedLogin(){
 	a:
 	system("cls");
@@ -751,13 +751,13 @@ int colorizedLogin(){
 			
 			goto x;
 		}else{
-		timer(10); //Girişin engellenme süresi ayarlanıyor
+		timer(10); //GiriÃ¾in engellenme sÃ¼resi ayarlanÃ½yor
 		goto a;
 		}
 		
 	}
 }
-//Giriş ekranı sonu
+//GiriÃ¾ ekranÃ½ sonu
 
 int main()
 {
