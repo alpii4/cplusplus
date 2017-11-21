@@ -49,7 +49,7 @@ int userControl(string username , string password){
 			return 1;//user login
 		}
 		else 
-			return 0;//failed login
+			return 0;//failed to login
 }
 int main(){
 int a= userControl("user","1234");
